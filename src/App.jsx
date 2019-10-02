@@ -12,18 +12,31 @@ const App = ({ getAllPokemon, pokemon }) => {
 
   return (
     <div className="container">
-      {pokemon.map(pokemon => (
-        <PokemonCard pokemon={pokemon} />
-      ))}
+      <div className="row">
+        {pokemon.map(pokemon => (
+          <PokemonCard
+            key={pokemon.name}
+            name={pokemon.name}
+            id={pokemon.id}
+            url={pokemon.url}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ pokemon }) => {
-  return { pokemon };
-};
+const mapStateToProps = ({ pokemon }) => ({
+  pokemon: pokemon.map(p => ({ ...p, id: getIdFromUrl(p.url) }))
+});
 
 const mapDispatchToProps = { getAllPokemon };
+
+const getIdFromUrl = url => {
+  const urlParts = url.split("/");
+  const id = urlParts[urlParts.length - 2];
+  return id;
+};
 
 export default connect(
   mapStateToProps,
