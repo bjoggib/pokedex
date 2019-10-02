@@ -2,18 +2,26 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { getAllPokemon } from "./redux/actions/pokemonActions";
-import "./App.css";
+import PokemonCard from "./components/PokemonCard";
 
 const App = ({ getAllPokemon, pokemon }) => {
   useEffect(() => {
-    getAllPokemon();
-    console.log("The pokemon:", pokemon);
+    const fetchPokemon = () => getAllPokemon();
+    fetchPokemon();
   }, []);
 
-  return <div className="App">Initial Test</div>;
+  return (
+    <div className="container">
+      {pokemon.map(pokemon => (
+        <PokemonCard pokemon={pokemon} />
+      ))}
+    </div>
+  );
 };
 
-const mapStateToProps = ({ pokemon }) => ({ pokemon });
+const mapStateToProps = ({ pokemon }) => {
+  return { pokemon };
+};
 
 const mapDispatchToProps = { getAllPokemon };
 
