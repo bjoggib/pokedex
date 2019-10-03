@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getAllPokemon } from "../redux/actions/pokemonActions";
 import PokemonCardList from "./PokemonCardList";
 import SearchBar from "./SearchBar";
+
 const HomePage = ({ getAllPokemon, pokemon }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [stopIndex, setstopIndex] = useState(20);
@@ -20,7 +21,6 @@ const HomePage = ({ getAllPokemon, pokemon }) => {
       return (
         <button
           className="btn mb-3"
-          type="button"
           onClick={() => setstopIndex(stopIndex + 20)}
         >
           Load More Pokemon
@@ -44,7 +44,7 @@ const HomePage = ({ getAllPokemon, pokemon }) => {
   return (
     <Fragment>
       <div className="row justify-content-center">
-        <SearchBar searchTerm={searchTerm} handl Change={handleInputChange} />
+        <SearchBar searchTerm={searchTerm} handleChange={handleInputChange} />
       </div>
       <div className="row">{renderPokemonList()}</div>
       <div className="row justify-content-center">
