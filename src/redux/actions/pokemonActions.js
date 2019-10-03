@@ -23,9 +23,9 @@ const getAllPokemon = () => async dispatch => {
   }
 };
 
-const getPokemonByName = name => async dispatch => {
+const getPokemonByNameOrId = nameOrId => async dispatch => {
   try {
-    const result = await axios.get(`${ROOT_URL}/${name}`);
+    const result = await axios.get(`${ROOT_URL}/${nameOrId}`);
     dispatch(getPokemonByNameSuccess(result.data));
   } catch (error) {
     console.log(error);
@@ -42,4 +42,4 @@ const getNextPageOfPokemon = nextPageUrl => async dispatch => {
   }
 };
 
-export { getAllPokemon, getPokemonByName, getNextPageOfPokemon };
+export { getAllPokemon, getPokemonByNameOrId, getNextPageOfPokemon };

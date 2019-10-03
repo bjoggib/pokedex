@@ -15,7 +15,9 @@ const HomePage = ({
 }) => {
   useEffect(() => {
     const fetchPokemon = () => getAllPokemon();
-    fetchPokemon();
+    if (pokemon.length === 0) {
+      fetchPokemon();
+    }
   }, []);
 
   const showLoadMorePokemonButton = () =>

@@ -34,3 +34,7 @@ body {
 .card {
   background-color: #ffce56;
 }
+
+.loading-indicator {
+  text-align: center;
+}

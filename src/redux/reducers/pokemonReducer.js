@@ -5,7 +5,8 @@ import {
 
 const INITIAL_STATE = {
   nextPage: null,
-  pokemonList: []
+  pokemonList: [],
+  chosenPokemon: null
 };
 
 const PokemonReducer = (state = INITIAL_STATE, action) => {
@@ -16,7 +17,7 @@ const PokemonReducer = (state = INITIAL_STATE, action) => {
         pokemonList: [...state.pokemonList, ...action.payload.results]
       };
     case GET_POKEMON_BY_NAME:
-      return state;
+      return { ...state, chosenPokemon: action.payload };
     default:
       return state;
   }
