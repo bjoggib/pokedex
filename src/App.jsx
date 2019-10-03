@@ -1,44 +1,18 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import HomePage from "./components/HomePage";
 
-import { getAllPokemon } from "./redux/actions/pokemonActions";
-import PokemonCard from "./components/PokemonCard";
-
-const App = ({ getAllPokemon, pokemon }) => {
-  useEffect(() => {
-    const fetchPokemon = () => getAllPokemon();
-    fetchPokemon();
-  }, []);
-
+const App = () => {
   return (
-    <div className="container">
-      <div className="row">
-        {pokemon.map(pokemon => (
-          <PokemonCard
-            key={pokemon.name}
-            name={pokemon.name}
-            id={pokemon.id}
-            url={pokemon.url}
-          />
-        ))}
+    <Router>
+      <div className="container mt-3">
+        <div className="logo-name"></div>
+        <Switch>
+          <Route path="/" component={HomePage} />
+        </Switch>
       </div>
-    </div>
+    </Router>
   );
 };
 
-const mapStateToProps = ({ pokemon }) => ({
-  pokemon: pokemon.map(p => ({ ...p, id: getIdFromUrl(p.url) }))
-});
-
-const mapDispatchToProps = { getAllPokemon };
-
-const getIdFromUrl = url => {
-  const urlParts = url.split("/");
-  const id = urlParts[urlParts.length - 2];
-  return id;
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default App;

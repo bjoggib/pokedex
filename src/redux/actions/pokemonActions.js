@@ -1,11 +1,11 @@
 import axios from "axios";
 
-import { GET_ALL_POKEMON, GET_POKEMON_BY_NAME } from "./actionTypeConstants";
+import { GET_POKEMON, GET_POKEMON_BY_NAME } from "./actionTypeConstants";
 
-const ROOT_URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=10";
+const ROOT_URL = "https://pokeapi.co/api/v2/pokemon";
 
 const getAllPokemonSuccess = payload => ({
-  type: GET_ALL_POKEMON,
+  type: GET_POKEMON,
   payload
 });
 
@@ -32,4 +32,14 @@ const getPokemonByName = name => async dispatch => {
   }
 };
 
-export { getAllPokemon, getPokemonByName };
+const getNextPageOfPokemon = nextPageUrl => async dispatch => {
+  try {
+    const result = await axios.get(nextPageUrl);
+    console.log("result:", result);
+    dispatch(getAllPokemonSuccess(result.data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getAllPokemon, getPokemonByName, getNextPageOfPokemon };

@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 
 // CSS imports
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
 // Relative imports
 import App from "./App";
