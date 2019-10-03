@@ -3,7 +3,8 @@ import axios from "axios";
 import {
   GET_POKEMON,
   GET_POKEMON_BY_NAME,
-  SAVE_TO_MY_POKEMON
+  SAVE_TO_MY_POKEMON,
+  DELETE_FROM_MY_POKEMON
 } from "./actionTypeConstants";
 
 const ROOT_URL = "https://pokeapi.co/api/v2/pokemon";
@@ -20,6 +21,11 @@ const getPokemonByNameSuccess = payload => ({
 
 const savePokemonSuccess = payload => ({
   type: SAVE_TO_MY_POKEMON,
+  payload
+});
+
+const deletePokemonSuccess = payload => ({
+  type: DELETE_FROM_MY_POKEMON,
   payload
 });
 
@@ -52,11 +58,21 @@ const getNextPageOfPokemon = nextPageUrl => async dispatch => {
 };
 
 const savePokemon = ({ name, id }) => async dispatch => {
-  console.log("HERE");
   try {
-    const result = await axios.post("/myPokemon", { name, number: id });
+    const result = await axios.post("/myPokemon", { name, id });
     console.log("result:", result);
     dispatch(savePokemonSuccess(result.data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deletePokemon = ({ id }) => async dispatch => {
+  console.log("HERE");
+  try {
+    const result = await axios.delete(`/myPokemon/${id}`);
+    console.log("result:", result);
+    dispatch(deletePokemonSuccess(result.data));
   } catch (error) {
     console.log(error);
   }
@@ -66,5 +82,6 @@ export {
   getAllPokemon,
   getPokemonByNameOrId,
   getNextPageOfPokemon,
-  savePokemon
+  savePokemon,
+  deletePokemon
 };
