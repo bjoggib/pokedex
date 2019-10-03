@@ -31,7 +31,7 @@ const deletePokemonSuccess = payload => ({
 
 const getAllPokemon = () => async dispatch => {
   try {
-    const result = await axios.get(ROOT_URL);
+    const result = await axios.get(`${ROOT_URL}?limit=900`);
     dispatch(getAllPokemonSuccess(result.data));
   } catch (error) {
     console.log(error);
@@ -72,7 +72,7 @@ const deletePokemon = ({ id }) => async dispatch => {
   try {
     const result = await axios.delete(`/myPokemon/${id}`);
     console.log("result:", result);
-    dispatch(deletePokemonSuccess(result.data));
+    dispatch(deletePokemonSuccess(id));
   } catch (error) {
     console.log(error);
   }

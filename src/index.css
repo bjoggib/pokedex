@@ -4,6 +4,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  font-family: "Anton", sans-serif;
 }
 
 .image-container {
@@ -32,9 +33,28 @@ body {
 }
 
 .card {
-  background-color: #ffce56;
+  background-color: #ffcd02;
+  width: 12.5rem;
+  border-radius: 15px;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+  height: 250px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+.link:hover {
+  text-decoration: none;
 }
 
 .loading-indicator {
   text-align: center;
+}
+
+.btn {
+  background-color: #ffcd02;
+  border-radius: 15px;
 }

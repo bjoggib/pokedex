@@ -6,7 +6,6 @@ import {
 } from "../actions/actionTypeConstants";
 
 const INITIAL_STATE = {
-  nextPage: null,
   pokemonList: [],
   chosenPokemon: null,
   myPokemon: []
@@ -17,7 +16,7 @@ const PokemonReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GET_POKEMON:
       return {
-        nextPage: action.payload.next,
+        ...state,
         pokemonList: [...state.pokemonList, ...payload.results]
       };
     case GET_POKEMON_BY_NAME:

@@ -1,3 +1,12 @@
 {
-  "myPokemon": []
+  "myPokemon": [
+    {
+      "name": "machop",
+      "id": 66
+    },
+    {
+      "name": "bulbasaur",
+      "id": 1
+    }
+  ]
 }
