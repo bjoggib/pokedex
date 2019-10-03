@@ -1,3 +1,9 @@
 {
-  "myPokemon": []
+  "myPokemon": [
+    {
+      "name": "ninetales",
+      "number": 38,
+      "id": 1
+    }
+  ]
 }

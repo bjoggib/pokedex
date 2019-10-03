@@ -1,10 +1,13 @@
 import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 
-import { getPokemonByNameOrId } from "../redux/actions/pokemonActions";
+import {
+  getPokemonByNameOrId,
+  savePokemon
+} from "../redux/actions/pokemonActions";
 import LoadingIndicator from "./LoadingIndicator";
 
-const HomePage = ({ match, getPokemonByNameOrId, pokemon }) => {
+const HomePage = ({ match, getPokemonByNameOrId, savePokemon, pokemon }) => {
   useEffect(() => {
     const id = match.params.id;
     const fetchPokemonById = () => getPokemonByNameOrId(id);
@@ -24,6 +27,9 @@ const HomePage = ({ match, getPokemonByNameOrId, pokemon }) => {
             ))}
           </div>
         </div>
+        <button type="button" onClick={() => savePokemon(pokemon)}>
+          Save to my pokemon
+        </button>
       </Fragment>
     );
   }
@@ -34,7 +40,7 @@ const mapStateToProps = ({ pokemon }) => ({
   pokemon: pokemon.chosenPokemon
 });
 
-const mapDispatchToProps = { getPokemonByNameOrId };
+const mapDispatchToProps = { getPokemonByNameOrId, savePokemon };
 
 export default connect(
   mapStateToProps,

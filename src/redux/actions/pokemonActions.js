@@ -1,6 +1,10 @@
 import axios from "axios";
 
-import { GET_POKEMON, GET_POKEMON_BY_NAME } from "./actionTypeConstants";
+import {
+  GET_POKEMON,
+  GET_POKEMON_BY_NAME,
+  SAVE_TO_MY_POKEMON
+} from "./actionTypeConstants";
 
 const ROOT_URL = "https://pokeapi.co/api/v2/pokemon";
 
@@ -11,6 +15,11 @@ const getAllPokemonSuccess = payload => ({
 
 const getPokemonByNameSuccess = payload => ({
   type: GET_POKEMON_BY_NAME,
+  payload
+});
+
+const savePokemonSuccess = payload => ({
+  type: SAVE_TO_MY_POKEMON,
   payload
 });
 
@@ -42,4 +51,20 @@ const getNextPageOfPokemon = nextPageUrl => async dispatch => {
   }
 };
 
-export { getAllPokemon, getPokemonByNameOrId, getNextPageOfPokemon };
+const savePokemon = ({ name, id }) => async dispatch => {
+  console.log("HERE");
+  try {
+    const result = await axios.post("/myPokemon", { name, number: id });
+    console.log("result:", result);
+    dispatch(savePokemonSuccess(result.data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export {
+  getAllPokemon,
+  getPokemonByNameOrId,
+  getNextPageOfPokemon,
+  savePokemon
+};
