@@ -9,8 +9,8 @@ import MyPokeDexPage from "./components/MyPokeDexPage";
 
 const App = () => (
   <Router>
+    <NavBar />
     <div className="container mt-3">
-      <NavBar />
       <div className="logo-name mt-3"></div>
       <Switch>
         <Route exact path="/" component={HomePage} />

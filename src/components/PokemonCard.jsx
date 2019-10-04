@@ -15,6 +15,7 @@ const PokemonCard = ({ name, id }) => {
         <Link className="link" to={`/pokemon/${id}`}>
           <h5 className="card-title mt-3">{formatString(name)}</h5>
           <div className="card-body">
+            <div className="image-outer-container"></div>
             <div className="image-container">
               <img
                 className="image"
