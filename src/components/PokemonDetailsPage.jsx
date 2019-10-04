@@ -34,11 +34,11 @@ const HomePage = ({
             ))}
           </div>
         </div>
-        <button type="button" onClick={() => savePokemon(pokemon)}>
+        <button className="btn" onClick={() => savePokemon(pokemon)}>
           Save to my pokemon
         </button>
-        <button type="button" onClick={() => deletePokemon(pokemon)}>
-          Save to my pokemon
+        <button className="btn" onClick={() => deletePokemon(pokemon)}>
+          Delete from my pokemon
         </button>
       </Fragment>
     );
