@@ -2,13 +2,14 @@ import {
   GET_POKEMON,
   GET_POKEMON_BY_NAME,
   SAVE_TO_MY_POKEMON,
-  DELETE_FROM_MY_POKEMON
+  DELETE_FROM_MY_POKEMON,
+  GET_MY_POKEDEX
 } from "../actions/actionTypeConstants";
 
 const INITIAL_STATE = {
   pokemonList: [],
   chosenPokemon: null,
-  myPokemon: []
+  myPokeDex: []
 };
 
 const PokemonReducer = (state = INITIAL_STATE, action) => {
@@ -22,11 +23,16 @@ const PokemonReducer = (state = INITIAL_STATE, action) => {
     case GET_POKEMON_BY_NAME:
       return { ...state, chosenPokemon: payload };
     case SAVE_TO_MY_POKEMON:
-      return { ...state, myPokemon: [...state.myPokemon, payload] };
+      return { ...state, myPokeDex: [...state.myPokeDex, payload] };
     case DELETE_FROM_MY_POKEMON:
       return {
         ...state,
-        myPokemon: state.myPokemon.filter(p => p.id !== payload)
+        myPokeDex: state.myPokeDex.filter(p => p.id !== payload)
+      };
+    case GET_MY_POKEDEX:
+      return {
+        ...state,
+        myPokeDex: payload
       };
     default:
       return state;

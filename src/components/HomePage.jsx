@@ -34,10 +34,19 @@ const HomePage = ({ getAllPokemon, pokemon }) => {
   const isSearchMatch = p =>
     p.name.toLowerCase().startsWith(searchTerm) || p.id === searchTerm;
 
+  const noSearchResultsMessage = (
+    <img src="/assets/noSearchResults.png" alt="no search results" />
+  );
+
   const renderPokemonList = () => {
     if (searchTerm.trim().length > 0) {
       const filteredPokemonList = pokemon.filter(isSearchMatch);
-      return <PokemonCardList pokemonList={filteredPokemonList} />;
+      return (
+        <PokemonCardList
+          pokemonList={filteredPokemonList}
+          emptyListMessage={noSearchResultsMessage}
+        />
+      );
     }
     return <PokemonCardList pokemonList={pokemon.slice(0, stopIndex)} />;
   };
