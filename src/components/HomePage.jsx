@@ -50,12 +50,15 @@ const HomePage = ({ getAllPokemon, pokemon }) => {
     }
     return <PokemonCardList pokemonList={pokemon.slice(0, stopIndex)} />;
   };
+
   return (
     <Fragment>
       <div className="row justify-content-center">
         <SearchBar searchTerm={searchTerm} handleChange={handleInputChange} />
       </div>
-      <div className="row">{renderPokemonList()}</div>
+      <div className="row row justify-content-center">
+        {renderPokemonList()}
+      </div>
       <div className="row justify-content-center">
         {showLoadMorePokemonButton()}
       </div>

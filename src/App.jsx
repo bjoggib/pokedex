@@ -11,7 +11,7 @@ const App = () => (
   <Router>
     <div className="container mt-3">
       <NavBar />
-      <div className="logo-name"></div>
+      <div className="logo-name mt-3"></div>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/pokemon/:id" component={PokemonDetailsPage} />

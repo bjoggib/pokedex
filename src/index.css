@@ -4,18 +4,23 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  font-family: "Anton", sans-serif;
+  font-family: "Gloria Hallelujah", cursive;
 }
 
 .image-container {
-  width: 125px;
-  height: 125px;
+  position: absolute;
+  width: 105px;
+  height: 105px;
   margin: 0 auto;
   padding: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
+  border: 3px solid black;
   vertical-align: center;
   background-color: #fff;
-
+  z-index: 10;
   text-align: center;
 }
 
@@ -24,30 +29,41 @@ body {
   background-image: url(https://fontmeme.com/permalink/191002/0953c62cdf19cd7edbf71c4d2f216be0.png);
   background-repeat: no-repeat;
   background-position: center;
+  background-size: contain;
   width: 100%;
 }
 
 .image {
-  width: 80%;
-  margin-top: 10%;
+  width: 90%;
 }
 
 .card {
-  background-color: #ffcd02;
+  overflow: hidden;
+  position: relative;
+  border: 3px solid black;
+  background-color: #e64340;
   width: 12.5rem;
-  border-radius: 15px;
+  border-radius: 122px;
   margin: 0 auto;
   float: none;
   margin-bottom: 10px;
   transition: all 0.2s ease;
-  height: 250px;
+  height: 220px;
+  width: 220px;
 }
 
 .card:hover {
   transform: scale(1.05);
 }
+
+.link {
+  color: white;
+  font-size: 50px;
+}
+
 .link:hover {
   text-decoration: none;
+  color: white;
 }
 
 .loading-indicator {
@@ -55,6 +71,24 @@ body {
 }
 
 .btn {
-  background-color: #ffcd02;
+  background-color: #e64340;
+  color: white;
   border-radius: 15px;
+}
+
+.col-md-3 {
+  flex: 0 0 20%;
+}
+
+.bottom-card {
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  background-color: white;
+  bottom: 0;
+
+  border-bottom-left-radius: 122px;
+  border-bottom-right-radius: 122px;
+  border-top: 3px solid black;
+  z-index: 0;
 }

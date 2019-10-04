@@ -1,7 +1,7 @@
 import React from "react";
 
 const SearchBar = ({ searchTerm, handleChange }) => (
-  <div className="col-md-6 mt-3 mb-3">
+  <div className="col-md-6 mt-4 mb-5">
     <form>
       <div className="form-group">
         <input

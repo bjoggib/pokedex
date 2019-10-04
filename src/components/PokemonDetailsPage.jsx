@@ -4,24 +4,41 @@ import { connect } from "react-redux";
 import {
   getPokemonByNameOrId,
   savePokemon,
-  deletePokemon
+  deletePokemon,
+  getMyPokeDex
 } from "../redux/actions/pokemonActions";
 import LoadingIndicator from "./LoadingIndicator";
 
-const HomePage = ({
+const PokemonDetailsPage = ({
   match,
   getPokemonByNameOrId,
+  getMyPokeDex,
   savePokemon,
   deletePokemon,
-  pokemon
+  pokemon,
+  myPokeDex
 }) => {
   useEffect(() => {
     const id = match.params.id;
     const fetchPokemonById = () => getPokemonByNameOrId(id);
     fetchPokemonById();
+    getMyPokeDex();
   }, []);
 
-  console.log("I chose:", pokemon);
+  const renderButtons = () => {
+    console.log("renderButton", myPokeDex, myPokeDex.find(p => p.id === 66));
+    return myPokeDex.find(p => p.id === pokemon.id) ? (
+      <Button
+        text="Delete From My PokeDex"
+        handleClick={() => deletePokemon(pokemon)}
+      />
+    ) : (
+      <Button
+        text="Save To My PokeDex"
+        handleClick={() => savePokemon(pokemon)}
+      />
+    );
+  };
 
   if (pokemon) {
     return (
@@ -34,25 +51,32 @@ const HomePage = ({
             ))}
           </div>
         </div>
-        <button className="btn" onClick={() => savePokemon(pokemon)}>
-          Save to my pokemon
-        </button>
-        <button className="btn" onClick={() => deletePokemon(pokemon)}>
-          Delete from my pokemon
-        </button>
+        {renderButtons()}
       </Fragment>
     );
   }
   return <LoadingIndicator />;
 };
 
+const Button = ({ text, handleClick }) => (
+  <button className="btn" onClick={handleClick}>
+    {text}
+  </button>
+);
+
 const mapStateToProps = ({ pokemon }) => ({
-  pokemon: pokemon.chosenPokemon
+  pokemon: pokemon.chosenPokemon,
+  myPokeDex: pokemon.myPokeDex
 });
 
-const mapDispatchToProps = { getPokemonByNameOrId, savePokemon, deletePokemon };
+const mapDispatchToProps = {
+  getPokemonByNameOrId,
+  savePokemon,
+  deletePokemon,
+  getMyPokeDex
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HomePage);
+)(PokemonDetailsPage);

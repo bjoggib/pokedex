@@ -1,20 +1,3 @@
 {
-  "myPokemon": [
-    {
-      "name": "machop",
-      "id": 66
-    },
-    {
-      "name": "bulbasaur",
-      "id": 1
-    },
-    {
-      "name": "venusaur",
-      "id": 3
-    },
-    {
-      "name": "ivysaur",
-      "id": 2
-    }
-  ]
+  "myPokemon": []
 }
