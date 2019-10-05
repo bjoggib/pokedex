@@ -13,7 +13,7 @@ const ROOT_URL = "https://pokeapi.co/api/v2/pokemon";
 
 const getAllPokemon = () => async dispatch => {
   try {
-    const result = await axios.get(`${ROOT_URL}ff?limit=900`);
+    const result = await axios.get(`${ROOT_URL}?limit=900`);
     dispatch({ type: GET_POKEMON, payload: result.data });
   } catch (error) {
     throw error;

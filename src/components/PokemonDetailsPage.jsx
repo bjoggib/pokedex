@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 
 import {
@@ -11,6 +11,8 @@ import {
 import Button from "./common/Button";
 import LoadingIndicator from "./LoadingIndicator";
 import PokemonProfileItem from "./PokemonProfileItem";
+import { toast } from "react-toastify";
+import { errorStyles } from "../helpers/toastStyles";
 
 const PokemonDetailsPage = ({
   match,
@@ -21,9 +23,11 @@ const PokemonDetailsPage = ({
   pokemon,
   myPokeDex
 }) => {
+  const [notFoundError, setNotFoundError] = useState(false);
   useEffect(() => {
+    const errorMessage = "We were unable to find Details about this Pokemon";
     const id = match.params.id;
-    const fetchPokemonById = () => getPokemonById(id);
+    const fetchPokemonById = () => getPokemonById(id).catch(setNotFoundError(true));
     fetchPokemonById();
     getMyPokeDex();
 
@@ -35,9 +39,10 @@ const PokemonDetailsPage = ({
     const maleRate = 100 - femaleRate;
     return [femaleRate, maleRate];
   };
-
+  if (notFoundError) {
+    return <div>We were unable to find details about this pokemon</div>;
+  }
   if (pokemon) {
-    console.log("herna", pokemon);
     return (
       <Fragment>
         <div className="row">
