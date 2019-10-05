@@ -1,6 +1,6 @@
 import {
   GET_POKEMON,
-  GET_POKEMON_BY_NAME,
+  GET_POKEMON_BY_ID,
   SAVE_TO_MY_POKEMON,
   DELETE_FROM_MY_POKEMON,
   GET_MY_POKEDEX,
@@ -21,7 +21,7 @@ const PokemonReducer = (state = INITIAL_STATE, action) => {
         ...state,
         pokemonList: [...state.pokemonList, ...payload.results]
       };
-    case GET_POKEMON_BY_NAME:
+    case GET_POKEMON_BY_ID:
       return { ...state, chosenPokemon: payload };
     case SAVE_TO_MY_POKEMON:
       return { ...state, myPokeDex: [...state.myPokeDex, payload] };
