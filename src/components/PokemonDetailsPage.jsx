@@ -2,7 +2,8 @@ import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 
 import {
-  getPokemonByNameOrId,
+  resetChosenPokemon,
+  getPokemonById,
   savePokemon,
   deletePokemon,
   getMyPokeDex
@@ -13,17 +14,20 @@ import PokemonProfileItem from "./PokemonProfileItem";
 
 const PokemonDetailsPage = ({
   match,
-  getPokemonByNameOrId,
+  getPokemonById,
   getMyPokeDex,
+  resetChosenPokemon,
   savePokemon,
   pokemon,
   myPokeDex
 }) => {
   useEffect(() => {
     const id = match.params.id;
-    const fetchPokemonById = () => getPokemonByNameOrId(id);
+    const fetchPokemonById = () => getPokemonById(id);
     fetchPokemonById();
     getMyPokeDex();
+
+    return () => resetChosenPokemon();
   }, []);
 
   const getGenderRate = genderRate => {
@@ -193,10 +197,11 @@ const mapStateToProps = ({ pokemon }) => ({
 });
 
 const mapDispatchToProps = {
-  getPokemonByNameOrId,
+  getPokemonById,
   savePokemon,
   deletePokemon,
-  getMyPokeDex
+  getMyPokeDex,
+  resetChosenPokemon
 };
 
 export default connect(

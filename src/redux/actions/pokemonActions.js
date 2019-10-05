@@ -5,7 +5,8 @@ import {
   GET_POKEMON_BY_NAME,
   SAVE_TO_MY_POKEMON,
   DELETE_FROM_MY_POKEMON,
-  GET_MY_POKEDEX
+  GET_MY_POKEDEX,
+  RESET_CHOSEN_POKEMON
 } from "./actionTypeConstants";
 
 const ROOT_URL = "https://pokeapi.co/api/v2/pokemon";
@@ -44,7 +45,7 @@ const getAllPokemon = () => async dispatch => {
   }
 };
 
-const getPokemonByNameOrId = nameOrId => async dispatch => {
+const getPokemonById = nameOrId => async dispatch => {
   try {
     const pokemonDetails = await axios.get(`${ROOT_URL}/${nameOrId}`);
     const speciesDetails = await axios.get(`${ROOT_URL}-species/${nameOrId}`);
@@ -84,4 +85,15 @@ const getMyPokeDex = () => async dispatch => {
   }
 };
 
-export { getAllPokemon, getPokemonByNameOrId, savePokemon, deletePokemon, getMyPokeDex };
+const resetChosenPokemon = () => async dispatch => {
+  dispatch({ type: "RESET_CHOSEN_POKEMON", payload: null });
+};
+
+export {
+  getAllPokemon,
+  getPokemonById,
+  savePokemon,
+  deletePokemon,
+  getMyPokeDex,
+  resetChosenPokemon
+};
