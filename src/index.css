@@ -197,3 +197,11 @@ body {
 .card-header:first-child {
   border-radius: 15px;
 }
+
+.black-background {
+  background-color: black;
+}
+
+.success {
+  background-color: pink;
+}

@@ -21,7 +21,7 @@ const App = () => (
         <Route path="/mypokedex" component={MyPokeDexPage} />
         <Route component={PageNotFound} />
       </Switch>
-      <ToastContainer autoClose={3000} hideProgressBar />
+      <ToastContainer autoClose={3000} hideProgressBar closeButton={false} />
     </div>
   </Router>
 );
