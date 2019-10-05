@@ -1,3 +1,8 @@
 {
-  "myPokeDex": []
+  "myPokeDex": [
+    {
+      "name": "squirtle",
+      "id": "7"
+    }
+  ]
 }

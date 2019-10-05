@@ -12,7 +12,7 @@ import Button from "./common/Button";
 import LoadingIndicator from "./LoadingIndicator";
 import PokemonProfileItem from "./PokemonProfileItem";
 import { toast } from "react-toastify";
-import { errorStyles } from "../helpers/toastStyles";
+import { errorStyles, successStyles } from "../helpers/toastStyles";
 
 const PokemonDetailsPage = ({
   match,
@@ -39,9 +39,9 @@ const PokemonDetailsPage = ({
     const maleRate = 100 - femaleRate;
     return [femaleRate, maleRate];
   };
-  if (notFoundError) {
-    return <div>We were unable to find details about this pokemon</div>;
-  }
+  // if (notFoundError) {
+  //   return <div>We were unable to find details about this pokemon</div>;
+  // }
   if (pokemon) {
     return (
       <Fragment>
@@ -57,11 +57,25 @@ const PokemonDetailsPage = ({
                   </div>
                   <div className="col">
                     <div className="float-right">
-                      <Button
-                        text="Add To My PokeDex"
-                        handleClick={() => savePokemon(pokemon.name, pokemon.id)}
-                        classes="btn"
-                      />
+                      {myPokeDex.find(p => parseInt(p.id, 10) === parseInt(pokemon.id, 10)) ===
+                      undefined ? (
+                        <Button
+                          text="Add To My PokeDex"
+                          handleClick={() =>
+                            savePokemon(pokemon.name, pokemon.id)
+                              .then(
+                                toast.success(`${pokemon.name} saved to My PokeDex`, successStyles)
+                              )
+                              .catch(
+                                toast.error(
+                                  `Unable To save ${pokemon.name} to My PokeDex`,
+                                  errorStyles
+                                )
+                              )
+                          }
+                          classes="btn"
+                        />
+                      ) : null}
                     </div>
                   </div>
                 </div>

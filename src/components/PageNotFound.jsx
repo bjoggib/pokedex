@@ -1,17 +1,19 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 const PageNotFound = () => (
-  <div>
+  <Fragment>
     <div className="row justify-content-center">
-      <img src="/assets/pageNotFoundImage.png" alt="not found message" />
+      <div className="message-image">
+        <div className="col page-not-found background-image" />
+      </div>
     </div>
     <div className="row justify-content-center">
       <Link className="btn" to="/">
         Back To Home
       </Link>
     </div>
-  </div>
+  </Fragment>
 );
 
 export default PageNotFound;

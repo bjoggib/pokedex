@@ -37,7 +37,7 @@ const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
 
   const isSearchMatch = p => p.name.toLowerCase().startsWith(searchTerm) || p.id === searchTerm;
 
-  const noSearchResultsMessage = <div className="no-search-results" />;
+  const noSearchResultsMessage = <div className="col no-search-results background-image " />;
 
   const renderPokemonList = () => {
     if (searchTerm.trim().length > 0) {
@@ -58,7 +58,7 @@ const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
         <div className="row justify-content-center">
           <SearchBar searchTerm={searchTerm} handleChange={handleInputChange} />
         </div>
-        <div className="row row justify-content-center">{renderPokemonList()}</div>
+        <div className="row justify-content-center">{renderPokemonList()}</div>
         <div className="row justify-content-center">{showLoadMorePokemonButton()}</div>
       </Fragment>
     );

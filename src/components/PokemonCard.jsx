@@ -12,7 +12,7 @@ const PokemonCard = ({ name, id, myPokeDex, savePokemon, deletePokemon }) => {
   const [loading, setLoading] = useState(true);
 
   return (
-    <div className="col-md-3 mb-5 text-center">
+    <div className="col-md-4 col-lg-3 mb-5 text-center">
       <Link className="link" to={`/pokemon/${id}`}>
         <div className="pokecard ">
           <h5 className="card-title mt-3">{formatString(name)}</h5>
