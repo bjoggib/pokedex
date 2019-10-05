@@ -3,28 +3,30 @@ import { connect } from "react-redux";
 
 import { getAllPokemon, getMyPokeDex } from "../redux/actions/pokemonActions";
 import PokemonCardList from "./PokemonCardList";
+import LoadingIndicator from "./LoadingIndicator";
 import SearchBar from "./SearchBar";
+import { toast } from "react-toastify";
+import { errorStyles } from "../helpers/toastStyles";
 
 const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [stopIndex, setstopIndex] = useState(20);
 
   useEffect(() => {
-    const fetchPokemon = () => getAllPokemon();
-    const fetchPokeDex = () => getMyPokeDex();
+    const fetchPokemon = () => {
+      getAllPokemon().catch(() => toast.error(errorMessage, errorStyles));
+      getMyPokeDex().catch(() => toast.error(errorMessage, errorStyles));
+    };
+    const errorMessage = "The server is not responding. Please try to refresh the page";
     if (pokemon.length === 0) {
       fetchPokemon();
-      fetchPokeDex();
     }
   }, []);
 
   const showLoadMorePokemonButton = () => {
     if (stopIndex < pokemon.length && searchTerm.length === 0) {
       return (
-        <button
-          className="btn mb-3"
-          onClick={() => setstopIndex(stopIndex + 20)}
-        >
+        <button className="btn mb-3" onClick={() => setstopIndex(stopIndex + 20)}>
           Load More Pokemon
         </button>
       );
@@ -33,8 +35,7 @@ const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
 
   const handleInputChange = e => setSearchTerm(e.target.value);
 
-  const isSearchMatch = p =>
-    p.name.toLowerCase().startsWith(searchTerm) || p.id === searchTerm;
+  const isSearchMatch = p => p.name.toLowerCase().startsWith(searchTerm) || p.id === searchTerm;
 
   const noSearchResultsMessage = <div className="no-search-results" />;
 
@@ -51,19 +52,18 @@ const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
     return <PokemonCardList pokemonList={pokemon.slice(0, stopIndex)} />;
   };
 
-  return (
-    <Fragment>
-      <div className="row justify-content-center">
-        <SearchBar searchTerm={searchTerm} handleChange={handleInputChange} />
-      </div>
-      <div className="row row justify-content-center">
-        {renderPokemonList()}
-      </div>
-      <div className="row justify-content-center">
-        {showLoadMorePokemonButton()}
-      </div>
-    </Fragment>
-  );
+  if (pokemon.length > 0) {
+    return (
+      <Fragment>
+        <div className="row justify-content-center">
+          <SearchBar searchTerm={searchTerm} handleChange={handleInputChange} />
+        </div>
+        <div className="row row justify-content-center">{renderPokemonList()}</div>
+        <div className="row justify-content-center">{showLoadMorePokemonButton()}</div>
+      </Fragment>
+    );
+  }
+  return <LoadingIndicator />;
 };
 
 const mapStateToProps = ({ pokemon }) => ({
