@@ -9,7 +9,7 @@ import {
 } from "./actionTypeConstants";
 
 const ROOT_URL = "https://pokeapi.co/api/v2/pokemon";
-
+//api/v2/pokemon-species/{id or name}/
 const getAllPokemonSuccess = payload => ({
   type: GET_POKEMON,
   payload
@@ -46,8 +46,11 @@ const getAllPokemon = () => async dispatch => {
 
 const getPokemonByNameOrId = nameOrId => async dispatch => {
   try {
-    const result = await axios.get(`${ROOT_URL}/${nameOrId}`);
-    dispatch(getPokemonByNameSuccess(result.data));
+    const pokemonDetails = await axios.get(`${ROOT_URL}/${nameOrId}`);
+    const speciesDetails = await axios.get(`${ROOT_URL}-species/${nameOrId}`);
+    const result = { ...pokemonDetails.data, ...speciesDetails.data };
+    console.log("result:", result);
+    dispatch(getPokemonByNameSuccess(result));
   } catch (error) {
     console.log(error);
   }

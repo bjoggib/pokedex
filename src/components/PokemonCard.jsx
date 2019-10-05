@@ -13,8 +13,8 @@ const PokemonCard = ({ name, id, myPokeDex, savePokemon, deletePokemon }) => {
 
   return (
     <div className="col-md-3 mb-5 text-center">
-      <div className="card ">
-        <Link className="link" to={`/pokemon/${id}`}>
+      <Link className="link" to={`/pokemon/${id}`}>
+        <div className="pokecard ">
           <h5 className="card-title mt-3">{formatString(name)}</h5>
           <div className="image-outer-container"></div>
           <div className="image-container">
@@ -25,9 +25,10 @@ const PokemonCard = ({ name, id, myPokeDex, savePokemon, deletePokemon }) => {
               onLoad={() => setLoading(false)}
             />
           </div>
-        </Link>
-        <div className="bottom-card" />
-      </div>
+
+          <div className="bottom-card" />
+        </div>
+      </Link>
       {renderButton(id, name, myPokeDex, savePokemon, deletePokemon)}
     </div>
   );
