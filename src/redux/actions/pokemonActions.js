@@ -52,7 +52,7 @@ const getPokemonByNameOrId = nameOrId => async dispatch => {
     console.log("result:", result);
     dispatch(getPokemonByNameSuccess(result));
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -62,7 +62,7 @@ const savePokemon = (name, id) => async dispatch => {
     const result = await axios.post("/myPokeDex", { name, id });
     dispatch(savePokemonSuccess(result.data));
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -71,7 +71,7 @@ const deletePokemon = id => async dispatch => {
     await axios.delete(`/myPokeDex/${id}`);
     dispatch(deletePokemonSuccess(id));
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -80,14 +80,8 @@ const getMyPokeDex = () => async dispatch => {
     const result = await axios.get(`/myPokeDex`);
     dispatch(getMyPokeDexSuccess(result.data));
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
-export {
-  getAllPokemon,
-  getPokemonByNameOrId,
-  savePokemon,
-  deletePokemon,
-  getMyPokeDex
-};
+export { getAllPokemon, getPokemonByNameOrId, savePokemon, deletePokemon, getMyPokeDex };
