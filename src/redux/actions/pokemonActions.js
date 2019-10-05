@@ -53,31 +53,19 @@ const getPokemonByNameOrId = nameOrId => async dispatch => {
   }
 };
 
-const getNextPageOfPokemon = nextPageUrl => async dispatch => {
+const savePokemon = (name, id) => async dispatch => {
+  console.log("saving", name, id);
   try {
-    const result = await axios.get(nextPageUrl);
-    console.log("result:", result);
-    dispatch(getAllPokemonSuccess(result.data));
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const savePokemon = ({ name, id }) => async dispatch => {
-  console.log("HERE", name, id);
-  try {
-    const result = await axios.post("/myPokemon", { name, id });
-    console.log("result:", result);
+    const result = await axios.post("/myPokeDex", { name, id });
     dispatch(savePokemonSuccess(result.data));
   } catch (error) {
     console.log(error);
   }
 };
 
-const deletePokemon = ({ id }) => async dispatch => {
+const deletePokemon = id => async dispatch => {
   try {
-    const result = await axios.delete(`/myPokemon/${id}`);
-    console.log("result:", result);
+    await axios.delete(`/myPokeDex/${id}`);
     dispatch(deletePokemonSuccess(id));
   } catch (error) {
     console.log(error);
@@ -86,8 +74,7 @@ const deletePokemon = ({ id }) => async dispatch => {
 
 const getMyPokeDex = () => async dispatch => {
   try {
-    const result = await axios.get(`/myPokemon`);
-    console.log("result:", result);
+    const result = await axios.get(`/myPokeDex`);
     dispatch(getMyPokeDexSuccess(result.data));
   } catch (error) {
     console.log(error);
@@ -97,7 +84,6 @@ const getMyPokeDex = () => async dispatch => {
 export {
   getAllPokemon,
   getPokemonByNameOrId,
-  getNextPageOfPokemon,
   savePokemon,
   deletePokemon,
   getMyPokeDex

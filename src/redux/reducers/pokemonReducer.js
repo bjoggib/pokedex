@@ -30,6 +30,7 @@ const PokemonReducer = (state = INITIAL_STATE, action) => {
         myPokeDex: state.myPokeDex.filter(p => p.id !== payload)
       };
     case GET_MY_POKEDEX:
+      console.log("here we are");
       return {
         ...state,
         myPokeDex: payload

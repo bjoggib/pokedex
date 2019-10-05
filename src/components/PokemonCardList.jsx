@@ -7,11 +7,7 @@ const PokemonCardList = ({ pokemonList, emptyListMessage }) => {
       <PokemonCard key={p.name} name={p.name} id={p.id} />
     ));
   }
-  return (
-    <div className="col-sm-12 col-md-6 offset-md-2 mt-4">
-      {emptyListMessage}
-    </div>
-  );
+  return <div className="message-image">{emptyListMessage}</div>;
 };
 
 export default PokemonCardList;

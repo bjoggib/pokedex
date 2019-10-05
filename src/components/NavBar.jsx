@@ -2,48 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NavBar = () => (
-  <nav className="navbar navbar-expand-lg navbar-dark navbar-fixed">
-    <button
-      className="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarNav">
-      <ul className="navbar-nav">
-        <li className="nav-item">
-          <Link className="nav-link navbar-brand" to="/">
-            <img src="/assets/pokeball.png" alt="pokeball" />
-            <span className="nav-item-text">Home</span>
-          </Link>
-        </li>
-        <li className="nav-item ">
-          <Link className="nav-link navbar-brand mt-3" to="/mypokedex">
-            <span className="nav-item-text">My PokeDex</span>
-          </Link>
-        </li>
-      </ul>
+  <nav className="navbar sticky-top navbar-expand-lg navbar-dark">
+    <div className=" navbar-collapse" id="navbarTogglerDemo01">
+      <Link className="nav-link navbar-brand" to="/">
+        <img src="/assets/pokeball.png" alt="pokeball" />
+        <span className="nav-item-text">Home</span>
+      </Link>
+      <ul className="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+
+      <Link className="nav-link navbar-brand " to="/mypokedex">
+        <span className="nav-item-text">My PokeDex</span>
+        <img src="/assets/icon.png" alt="pokeball" />
+      </Link>
     </div>
   </nav>
-);
 
-{
-  /* const NavBar = () => (
-  <nav className="navbar fixed-top">
-    <Link className="navbar-brand" to="/">
-      <img src="/assets/pokeball.png" alt="pokeball" />
-    </Link>
-    <Link className="link" to="/mypokedex">
-      My PokeDex
-      <img src="/assets/icon.png" alt="pokedex" />
-    </Link>
-  </nav>
-); */
-}
+  // <nav className="navbar sticky-top navbar-dark">
+  //   <Link className="nav-link navbar-brand" to="/">
+  //     <img src="/assets/pokeball.png" alt="pokeball" />
+  //     <span className="nav-item-text">Home</span>
+  //   </Link>
+
+  //   <Link className="nav-link navbar-brand mt-3" to="/mypokedex">
+  //     <span className="nav-item-text">My PokeDex</span>
+  //     <img src="/assets/icon.png" alt="pokeball" />
+  //   </Link>
+  // </nav>
+);
 
 export default NavBar;

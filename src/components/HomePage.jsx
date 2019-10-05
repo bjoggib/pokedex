@@ -1,18 +1,20 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 
-import { getAllPokemon } from "../redux/actions/pokemonActions";
+import { getAllPokemon, getMyPokeDex } from "../redux/actions/pokemonActions";
 import PokemonCardList from "./PokemonCardList";
 import SearchBar from "./SearchBar";
 
-const HomePage = ({ getAllPokemon, pokemon }) => {
+const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [stopIndex, setstopIndex] = useState(20);
 
   useEffect(() => {
     const fetchPokemon = () => getAllPokemon();
+    const fetchPokeDex = () => getMyPokeDex();
     if (pokemon.length === 0) {
       fetchPokemon();
+      fetchPokeDex();
     }
   }, []);
 
@@ -34,9 +36,7 @@ const HomePage = ({ getAllPokemon, pokemon }) => {
   const isSearchMatch = p =>
     p.name.toLowerCase().startsWith(searchTerm) || p.id === searchTerm;
 
-  const noSearchResultsMessage = (
-    <img src="/assets/noSearchResults.png" alt="no search results" />
-  );
+  const noSearchResultsMessage = <div className="no-search-results" />;
 
   const renderPokemonList = () => {
     if (searchTerm.trim().length > 0) {
@@ -70,7 +70,7 @@ const mapStateToProps = ({ pokemon }) => ({
   pokemon: pokemon.pokemonList.map(p => ({ ...p, id: getIdFromUrl(p.url) }))
 });
 
-const mapDispatchToProps = { getAllPokemon };
+const mapDispatchToProps = { getAllPokemon, getMyPokeDex };
 
 const getIdFromUrl = url => {
   const urlParts = url.split("/");

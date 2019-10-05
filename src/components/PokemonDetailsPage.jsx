@@ -7,6 +7,7 @@ import {
   deletePokemon,
   getMyPokeDex
 } from "../redux/actions/pokemonActions";
+import { renderButton } from "../helpers/componentUtils";
 import LoadingIndicator from "./LoadingIndicator";
 
 const PokemonDetailsPage = ({
@@ -25,21 +26,6 @@ const PokemonDetailsPage = ({
     getMyPokeDex();
   }, []);
 
-  const renderButtons = () => {
-    console.log("renderButton", myPokeDex, myPokeDex.find(p => p.id === 66));
-    return myPokeDex.find(p => p.id === pokemon.id) ? (
-      <Button
-        text="Delete From My PokeDex"
-        handleClick={() => deletePokemon(pokemon)}
-      />
-    ) : (
-      <Button
-        text="Save To My PokeDex"
-        handleClick={() => savePokemon(pokemon)}
-      />
-    );
-  };
-
   if (pokemon) {
     return (
       <Fragment>
@@ -51,18 +37,12 @@ const PokemonDetailsPage = ({
             ))}
           </div>
         </div>
-        {renderButtons()}
+        {renderButton(pokemon.id, pokemon.name, myPokeDex)}
       </Fragment>
     );
   }
   return <LoadingIndicator />;
 };
-
-const Button = ({ text, handleClick }) => (
-  <button className="btn" onClick={handleClick}>
-    {text}
-  </button>
-);
 
 const mapStateToProps = ({ pokemon }) => ({
   pokemon: pokemon.chosenPokemon,
