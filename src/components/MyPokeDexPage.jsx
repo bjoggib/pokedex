@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import { getMyPokeDex } from "../redux/actions/pokemonActions";
 import PokemonCardList from "./PokemonCardList";
 
-const emptyPokeDexImage = (
-  <img src="/assets/emptyPokeDexImage.png" alt="emptyPokedex" />
-);
+const emptyPokeDexImage = <img src="/assets/emptyPokeDexImage.png" alt="emptyPokedex" />;
 const MyPokeDexPage = ({ myPokeDex, getMyPokeDex }) => {
   useEffect(() => {
     const fetchPokemon = () => getMyPokeDex();
@@ -17,11 +15,8 @@ const MyPokeDexPage = ({ myPokeDex, getMyPokeDex }) => {
   console.log("pokeDex:", myPokeDex);
   if (myPokeDex) {
     return (
-      <div className="row">
-        <PokemonCardList
-          pokemonList={myPokeDex}
-          emptyListMessage={emptyPokeDexImage}
-        />
+      <div className="row justify-content-center">
+        <PokemonCardList pokemonList={myPokeDex} emptyListMessage={emptyPokeDexImage} />
       </div>
     );
   }

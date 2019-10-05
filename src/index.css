@@ -1,6 +1,6 @@
 body {
   height: 95vh;
-  background-image: url(/assets/ash2.png);
+  background-image: url(/assets/ash.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -25,7 +25,6 @@ body {
 }
 
 .image-container {
-  /*box-shadow: 0px 0px 0px 32px rgba(81, 100, 109, 1);*/
   position: absolute;
   width: 45%;
   height: 45%;
@@ -60,6 +59,8 @@ body {
 
 .nav-item-text {
   padding: 10px;
+  color: #fff;
+  font-size: 18px;
 }
 
 .nav-item-text:hover {
@@ -118,7 +119,6 @@ body {
   color: black;
   border-radius: 15px;
   border: 2px solid black;
-  /* margin-top: -40px; */
 }
 
 .btn:hover {
@@ -204,4 +204,35 @@ body {
 
 .success {
   background-color: pink;
+}
+
+.selected-link {
+  font-size: 30px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .nav-item-text {
+    display: none;
+  }
+
+  .nav-link {
+    display: inline;
+  }
+
+  .navbar {
+    padding: 0;
+  }
+  .navbar-nav {
+    display: none;
+  }
+  .logo-name {
+    top: 35px;
+  }
+
+  .pokeball-icon {
+    margin-top: 10px;
+  }
+  .pokedex-icon {
+    float: right !important;
+  }
 }
