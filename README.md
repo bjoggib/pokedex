@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## How to run project
 
 1. Make sure you have a node installed on your computer(version 8.10 or higher).
-2. Run npm install to install all depencies.
+2. Run npm install to install all dependencies.
 3. Run the command: npm run dev, this will launch json server on port 5000 and the React application on port 3000.
 
 ## Tools used
