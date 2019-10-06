@@ -9,7 +9,7 @@ const PokemonProfileMain = ({ sectionName, profileDict }) => (
       </h2>
     </div>
     {Object.keys(profileDict).map(pv => (
-      <PokemonProfileItem title={pv} value={profileDict[pv]} />
+      <PokemonProfileItem key={pv} title={pv} value={profileDict[pv]} />
     ))}
   </div>
 );

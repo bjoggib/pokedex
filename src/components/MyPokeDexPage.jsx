@@ -10,6 +10,7 @@ const MyPokeDexPage = ({ myPokeDex, getMyPokeDex }) => {
     if (myPokeDex.length === 0) {
       fetchPokemon();
     }
+    //eslint-disable-next-line
   }, []);
 
   if (myPokeDex) {

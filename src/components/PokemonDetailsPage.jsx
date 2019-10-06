@@ -25,6 +25,7 @@ const PokemonDetailsPage = ({ match, actions, pokemon, myPokeDex, profileDict })
     fetchPokemonById();
 
     return () => actions.resetChosenPokemon();
+    //eslint-disable-next-line
   }, []);
 
   const getAbilities = () => pokemon.abilities.map(a => a.ability.name);
@@ -86,12 +87,13 @@ const PokemonDetailsPage = ({ match, actions, pokemon, myPokeDex, profileDict })
 const mapStateToProps = ({ pokemon }) => {
   const profileDict = {};
   if (pokemon.chosenPokemon) {
-    profileDict["Height"] = `${utils.fromDmToCm(pokemon.chosenPokemon.height)} cm`;
-    profileDict["Weight"] = `${utils.fromHgtoKg(pokemon.chosenPokemon.weight)} kg`;
-    profileDict["Capture Rate"] = `${utils.getCaptureRate(pokemon.chosenPokemon.capture_rate)} %`;
-    profileDict["Color"] = pokemon.chosenPokemon.color.name;
-    profileDict["Hatch Counter"] = pokemon.chosenPokemon.hatch_counter;
-    profileDict["Habitat"] = pokemon.chosenPokemon.habitat.name;
+    const { chosenPokemon } = pokemon;
+    profileDict["Height"] = `${utils.fromDmToCm(chosenPokemon.height)} cm`;
+    profileDict["Weight"] = `${utils.fromHgtoKg(chosenPokemon.weight)} kg`;
+    profileDict["Capture Rate"] = `${utils.getCaptureRate(chosenPokemon.capture_rate)} %`;
+    profileDict["Color"] = chosenPokemon.color ? chosenPokemon.color.name : "N/A";
+    profileDict["Hatch Counter"] = chosenPokemon.hatch_counter;
+    profileDict["Habitat"] = chosenPokemon.habitat ? chosenPokemon.habitat.name : "N/A";
     profileDict["Genders"] = utils.getGenders(pokemon.chosenPokemon.gender_rate);
   }
   return {

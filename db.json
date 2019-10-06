@@ -1,16 +1,3 @@
 {
-  "myPokeDex": [
-    {
-      "name": "charmeleon",
-      "id": "5"
-    },
-    {
-      "name": "ivysaur",
-      "id": "2"
-    },
-    {
-      "name": "bulbasaur",
-      "id": 1
-    }
-  ]
+  "myPokeDex": []
 }

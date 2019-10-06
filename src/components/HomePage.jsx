@@ -21,6 +21,7 @@ const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
     if (pokemon.length === 0) {
       fetchPokemon();
     }
+    //eslint-disable-next-line
   }, []);
 
   const showLoadMorePokemonButton = () => {
