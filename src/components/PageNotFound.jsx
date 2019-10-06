@@ -1,13 +1,10 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import ErrorImageMessage from "./ErrorImageMessage";
 
 const PageNotFound = () => (
   <Fragment>
-    <div className="row justify-content-center">
-      <div className="message-image">
-        <div className="col page-not-found background-image" />
-      </div>
-    </div>
+    <ErrorImageMessage classes="page-not-found" />;
     <div className="row justify-content-center">
       <Link className="btn btn-lg" to="/">
         Back To Home

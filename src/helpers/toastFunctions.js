@@ -15,9 +15,13 @@ const deleteFromPokeDexSuccess = name => {
 const deleteFromPokeDexError = name =>
   toast.error(`Unable to delete ${stringCapitalized(name)} from to My PokeDex!`, errorStyles);
 
+const noResponseFromServer = () =>
+  toast.error("The server is not responding. Please try to refresh the page", errorStyles);
+
 export {
   saveToPokeDexSuccess,
   saveToPokeDexError,
   deleteFromPokeDexSuccess,
-  deleteFromPokeDexError
+  deleteFromPokeDexError,
+  noResponseFromServer
 };

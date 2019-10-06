@@ -1,13 +1,12 @@
 import React from "react";
 import PokemonCard from "./PokemonCard";
+import ErrorImageMessage from "./ErrorImageMessage";
 
-const PokemonCardList = ({ pokemonList, emptyListMessage }) => {
+const PokemonCardList = ({ pokemonList, emptyListClasses }) => {
   if (pokemonList.length > 0) {
-    return pokemonList.map(p => (
-      <PokemonCard key={p.name} name={p.name} id={p.id} />
-    ));
+    return pokemonList.map(p => <PokemonCard key={p.name} name={p.name} id={p.id} />);
   }
-  return <div className="message-image">{emptyListMessage}</div>;
+  return <ErrorImageMessage classes={emptyListClasses} />;
 };
 
 export default PokemonCardList;

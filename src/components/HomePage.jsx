@@ -5,20 +5,18 @@ import { getAllPokemon, getMyPokeDex } from "../redux/actions/pokemonActions";
 import PokemonCardList from "./PokemonCardList";
 import LoadingIndicator from "./LoadingIndicator";
 import SearchBar from "./SearchBar";
-import { toast } from "react-toastify";
-import { errorStyles } from "../helpers/toastStyles";
 import { getIdFromUrl } from "../helpers/utils";
+import { noResponseFromServer } from "../helpers/toastFunctions";
 
 const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [stopIndex, setstopIndex] = useState(20);
-
+  const POKEMON_PER_PAGE = 20;
   useEffect(() => {
     const fetchPokemon = () => {
-      getAllPokemon().catch(() => toast.error(errorMessage, errorStyles));
-      getMyPokeDex().catch(() => toast.error(errorMessage, errorStyles));
+      getAllPokemon().catch(() => noResponseFromServer());
+      getMyPokeDex().catch(() => noResponseFromServer());
     };
-    const errorMessage = "The server is not responding. Please try to refresh the page";
     if (pokemon.length === 0) {
       fetchPokemon();
     }
@@ -27,7 +25,10 @@ const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
   const showLoadMorePokemonButton = () => {
     if (stopIndex < pokemon.length && searchTerm.length === 0) {
       return (
-        <button className="btn btn-lg mb-3" onClick={() => setstopIndex(stopIndex + 20)}>
+        <button
+          className="btn btn-lg mb-3"
+          onClick={() => setstopIndex(stopIndex + POKEMON_PER_PAGE)}
+        >
           Load More Pokemon
         </button>
       );
@@ -36,9 +37,10 @@ const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
 
   const handleInputChange = e => setSearchTerm(e.target.value);
 
-  const isSearchMatch = p => p.name.toLowerCase().startsWith(searchTerm) || p.id === searchTerm;
+  const isSearchMatch = p =>
+    p.name.toLowerCase().startsWith(searchTerm) || p.id.startsWith(searchTerm);
 
-  const noSearchResultsMessage = <div className="col no-search-results background-image " />;
+  const noSearchResultclasses = "no-search-results";
 
   const renderPokemonList = () => {
     if (searchTerm.trim().length > 0) {
@@ -46,7 +48,7 @@ const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
       return (
         <PokemonCardList
           pokemonList={filteredPokemonList}
-          emptyListMessage={noSearchResultsMessage}
+          emptyListClasses={noSearchResultclasses}
         />
       );
     }

@@ -226,6 +226,24 @@ h5 {
   background-size: contain;
   width: 100%;
 }
+.details-not-found {
+  background-image: url(/assets/detailsNotFoundSmallScreen.png);
+}
+.no-search-results {
+  background-image: url(/assets/noSearchResultsSmallScreen.png);
+}
+
+.empty-pokedex {
+  background-image: url(/assets/emptyPokeDexSmallScreen.png);
+}
+
+.page-not-found {
+  background-image: url(/assets/pageNotFoundSmallScreen.png);
+}
+
+.details-not-found {
+  background-image: url(/assets/detailsNotFoundSmallScreen.png);
+}
 
 @media only screen and (max-width: 1000px) {
   .nav-item-text {
@@ -251,22 +269,6 @@ h5 {
   }
   .pokedex-icon {
     float: right !important;
-  }
-
-  .no-search-results {
-    background-image: url(/assets/noSearchResultsSmallScreen.png);
-  }
-
-  .empty-pokedex {
-    background-image: url(/assets/emptyPokeDexSmallScreen.png);
-  }
-
-  .page-not-found {
-    background-image: url(/assets/pageNotFoundSmallScreen.png);
-  }
-
-  .details-not-found {
-    background-image: url(/assets/detailsNotFoundSmallScreen.png);
   }
 
   .loading-indicator {

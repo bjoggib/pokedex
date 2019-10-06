@@ -16,6 +16,7 @@ import {
 import { saveToPokeDexError, saveToPokeDexSuccess } from "../helpers/toastFunctions";
 import ProgressBar from "./ProgressBar";
 import PokeCardHeader from "./PokeCardHeader";
+import ErrorImageMessage from "./ErrorImageMessage";
 
 const PokemonDetailsPage = ({ match, actions, pokemon, myPokeDex, profileValues }) => {
   const [detailsNotFound, setDetailsNotFound] = useState(false);
@@ -87,15 +88,9 @@ const PokemonDetailsPage = ({ match, actions, pokemon, myPokeDex, profileValues 
   );
 
   if (detailsNotFound) {
-    console.log("her");
-    return (
-      <div className="row">
-        <div className="message-image">
-          <div className="col page-not-found background-image" />
-        </div>
-      </div>
-    );
+    return <ErrorImageMessage classes="details-not-found" />;
   }
+
   if (pokemon) {
     return (
       <div className="row">
