@@ -194,6 +194,7 @@ h5 {
 
 .card {
   border-radius: 15px;
+  border: 2px solid black;
 }
 
 .card-header {
@@ -262,5 +263,11 @@ h5 {
 
   .page-not-found {
     background-image: url(/assets/pageNotFoundSmallScreen.png);
+  }
+
+  .loading-indicator {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
   }
 }

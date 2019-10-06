@@ -7,6 +7,7 @@ import LoadingIndicator from "./LoadingIndicator";
 import SearchBar from "./SearchBar";
 import { toast } from "react-toastify";
 import { errorStyles } from "../helpers/toastStyles";
+import { getIdFromUrl } from "../helpers/utils";
 
 const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,7 +27,7 @@ const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
   const showLoadMorePokemonButton = () => {
     if (stopIndex < pokemon.length && searchTerm.length === 0) {
       return (
-        <button className="btn mb-3" onClick={() => setstopIndex(stopIndex + 20)}>
+        <button className="btn btn-lg mb-3" onClick={() => setstopIndex(stopIndex + 20)}>
           Load More Pokemon
         </button>
       );
@@ -71,12 +72,6 @@ const mapStateToProps = ({ pokemon }) => ({
 });
 
 const mapDispatchToProps = { getAllPokemon, getMyPokeDex };
-
-const getIdFromUrl = url => {
-  const urlParts = url.split("/");
-  const id = urlParts[urlParts.length - 2];
-  return id;
-};
 
 export default connect(
   mapStateToProps,

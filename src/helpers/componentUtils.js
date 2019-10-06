@@ -1,24 +1,24 @@
 import React from "react";
-import { toast } from "react-toastify";
 
 import Button from "../components/common/Button";
-import { successStyles, errorStyles } from "./toastStyles";
+import { isInMyPokeDex } from "../helpers/utils";
+import * as toast from "./toastFunctions";
 
 const renderButton = (id, name, myPokeDex, savePokemon, deletePokemon) => {
   let text = "Save To My PokeDex";
   let classes = "btn";
   let clickHandler = () =>
     savePokemon(name, id)
-      .then(() => toast.success(`${name} added to My PokeDex!`, successStyles))
-      .catch(() => toast.error(`Unable to add ${name} to My PokeDex!`, errorStyles));
+      .then(() => toast.saveToPokeDexSuccess(name))
+      .catch(() => toast.saveToPokeDexError(name));
 
-  if (myPokeDex.find(p => parseInt(p.id, 10) === parseInt(id, 10))) {
+  if (isInMyPokeDex(myPokeDex, id)) {
     text = "Delete From My PokeDex";
     classes += " btn-danger";
     clickHandler = () =>
       deletePokemon(id)
-        .then(() => toast.success(`${name} deleted from to My PokeDex!`, successStyles))
-        .catch(() => toast.error(`Unable to delete ${name} from to My PokeDex!`, errorStyles));
+        .then(() => toast.deleteFromPokeDexSuccess(name))
+        .catch(() => toast.deleteFromPokeDexError(name));
   }
   return <Button classes={classes} text={text} handleClick={clickHandler} />;
 };
