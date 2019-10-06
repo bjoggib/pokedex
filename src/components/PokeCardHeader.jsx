@@ -6,8 +6,8 @@ const PokeCardHeader = ({ id, name, button }) => (
     <div className="row">
       <div className="col col-md-6">
         <h2>
-          <u># {id}</u>
-          <span className="mx-4">
+          <u>#{id}</u>
+          <span className="mx-3">
             <u>{stringCapitalized(name)}</u>
           </span>
         </h2>
