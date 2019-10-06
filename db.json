@@ -1,8 +1,16 @@
 {
   "myPokeDex": [
     {
-      "name": "squirtle",
-      "id": "7"
+      "name": "venusaur",
+      "id": 3
+    },
+    {
+      "name": "ivysaur",
+      "id": 2
+    },
+    {
+      "name": "bulbasaur",
+      "id": 1
     }
   ]
 }

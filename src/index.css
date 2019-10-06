@@ -7,6 +7,11 @@ body {
   font-family: "Gloria Hallelujah", cursive;
 }
 
+h2,
+h5 {
+  text-transform: capitalize;
+}
+
 .image-outer-container {
   position: absolute;
   width: 55%;

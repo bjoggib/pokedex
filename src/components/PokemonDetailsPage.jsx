@@ -63,10 +63,10 @@ const PokemonDetailsPage = ({
                           text="Add To My PokeDex"
                           handleClick={() =>
                             savePokemon(pokemon.name, pokemon.id)
-                              .then(
+                              .then(() =>
                                 toast.success(`${pokemon.name} saved to My PokeDex`, successStyles)
                               )
-                              .catch(
+                              .catch(() =>
                                 toast.error(
                                   `Unable To save ${pokemon.name} to My PokeDex`,
                                   errorStyles
@@ -104,7 +104,7 @@ const PokemonDetailsPage = ({
                     <div className="row">
                       <img
                         className="rounded mx-auto d-block mt-2"
-                        src={pokemon.sprites.front_default}
+                        src={`/assets/sprites/${pokemon.id}.png`}
                         alt={pokemon.name}
                       />
                     </div>
