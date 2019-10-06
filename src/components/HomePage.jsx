@@ -12,6 +12,7 @@ const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [stopIndex, setstopIndex] = useState(20);
   const POKEMON_PER_PAGE = 20;
+
   useEffect(() => {
     const fetchPokemon = () => {
       getAllPokemon().catch(() => noResponseFromServer());
@@ -40,17 +41,10 @@ const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
   const isSearchMatch = p =>
     p.name.toLowerCase().startsWith(searchTerm) || p.id.startsWith(searchTerm);
 
-  const noSearchResultclasses = "no-search-results";
-
   const renderPokemonList = () => {
     if (searchTerm.trim().length > 0) {
-      const filteredPokemonList = pokemon.filter(isSearchMatch);
-      return (
-        <PokemonCardList
-          pokemonList={filteredPokemonList}
-          emptyListClasses={noSearchResultclasses}
-        />
-      );
+      const searchResults = pokemon.filter(isSearchMatch);
+      return <PokemonCardList pokemonList={searchResults} emptyListClasses="no-search-results" />;
     }
     return <PokemonCardList pokemonList={pokemon.slice(0, stopIndex)} />;
   };
@@ -58,9 +52,7 @@ const HomePage = ({ getAllPokemon, getMyPokeDex, pokemon }) => {
   if (pokemon.length > 0) {
     return (
       <Fragment>
-        <div className="row justify-content-center">
-          <SearchBar searchTerm={searchTerm} handleChange={handleInputChange} />
-        </div>
+        <SearchBar searchTerm={searchTerm} handleChange={handleInputChange} />
         <div className="row justify-content-center">{renderPokemonList()}</div>
         <div className="row justify-content-center">{showLoadMorePokemonButton()}</div>
       </Fragment>

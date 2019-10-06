@@ -10,7 +10,7 @@ const NavBar = () => (
       </NavLink>
       <ul className="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
 
-      <NavLink activeClassName="selected-link" className="nav-link " to="/mypokedex">
+      <NavLink activeClassName="selected-link" className="nav-link " to="/mypokedex" exact>
         <span className="nav-item-text">My PokeDex</span>
         <img className="pokedex-icon" src="/assets/icon.png" alt="pokeball" />
       </NavLink>

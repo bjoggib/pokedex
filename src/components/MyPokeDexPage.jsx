@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getMyPokeDex } from "../redux/actions/pokemonActions";
 import PokemonCardList from "./PokemonCardList";
+import LoadingIndicator from "./LoadingIndicator";
 
-const emptyPokeDexImage = <div className="col empty-pokedex background-image" />;
 const MyPokeDexPage = ({ myPokeDex, getMyPokeDex }) => {
   useEffect(() => {
     const fetchPokemon = () => getMyPokeDex();
@@ -15,11 +15,11 @@ const MyPokeDexPage = ({ myPokeDex, getMyPokeDex }) => {
   if (myPokeDex) {
     return (
       <div className="row justify-content-center">
-        <PokemonCardList pokemonList={myPokeDex} emptyListMessage={emptyPokeDexImage} />
+        <PokemonCardList pokemonList={myPokeDex} emptyListClasses="empty-pokedex" />
       </div>
     );
   }
-  return <p>Loading</p>;
+  return <LoadingIndicator />;
 };
 
 const mapStateToProps = ({ pokemon }) => {

@@ -2,8 +2,8 @@ import React from "react";
 
 const ProgressBar = ({ stat, baseStat }) => (
   <div className="row">
-    <div className="col-12 col-md-3">{stat.name}</div>
-    <div className="col-12 col-md-9">
+    <h5 className="col-12 col-md-4">{stat.name}</h5>
+    <div className="col-12 col-md-8">
       <div className="progress">
         <div
           className="progress-bar"

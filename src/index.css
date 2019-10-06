@@ -276,4 +276,12 @@ h5 {
     height: auto;
     margin: 0 auto;
   }
+
+  .sticky-top {
+    position: relative;
+  }
+
+  .float-right {
+    float: none !important;
+  }
 }

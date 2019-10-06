@@ -1,15 +1,19 @@
 import React from "react";
+import { stringCapitalized } from "../helpers/utils";
 
-const PokeCardHeader = ({ pokeIndex, button }) => (
+const PokeCardHeader = ({ id, name, button }) => (
   <div className="card-header">
     <div className="row">
-      <div className="col-4">
+      <div className="col col-md-6">
         <h2>
-          <u># {pokeIndex}</u>
+          <u># {id}</u>
+          <span className="mx-4">
+            <u>{stringCapitalized(name)}</u>
+          </span>
         </h2>
       </div>
       <div className="col">
-        <div className="float-right">{button}</div>
+        <div className="text-center float-right">{button}</div>
       </div>
     </div>
   </div>

@@ -14,7 +14,7 @@ const PokemonCard = ({ name, id, myPokeDex, savePokemon, deletePokemon }) => {
   return (
     <div className="col-md-4 col-lg-3 mb-5 text-center">
       <Link className="link" to={`/pokemon/${id}`}>
-        <div className="pokecard ">
+        <div className="pokecard">
           <h5 className="card-title mt-3">{formatString(name)}</h5>
           <div className="image-outer-container"></div>
           <div className="image-container">

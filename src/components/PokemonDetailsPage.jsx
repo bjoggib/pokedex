@@ -5,21 +5,18 @@ import { connect } from "react-redux";
 import * as pokemonActions from "../redux/actions/pokemonActions";
 import Button from "./common/Button";
 import LoadingIndicator from "./LoadingIndicator";
-import PokemonProfileItem from "./PokemonProfileItem";
-import {
-  isInMyPokeDex,
-  fromDmToCm,
-  fromHgtoKg,
-  getGenders,
-  getCaptureRate
-} from "../helpers/utils";
+import * as utils from "../helpers/utils";
 import { saveToPokeDexError, saveToPokeDexSuccess } from "../helpers/toastFunctions";
-import ProgressBar from "./ProgressBar";
 import PokeCardHeader from "./PokeCardHeader";
 import ErrorImageMessage from "./ErrorImageMessage";
+import PokemonStatistics from "./PokemonStatistics";
+import PokemonProfileSub from "./PokemonProfileSub";
+import PokemonProfileMain from "./PokemonProfileMain";
+import PokemonProfileDescription from "./PokemonProfileDescription";
 
-const PokemonDetailsPage = ({ match, actions, pokemon, myPokeDex, profileValues }) => {
+const PokemonDetailsPage = ({ match, actions, pokemon, myPokeDex, profileDict }) => {
   const [detailsNotFound, setDetailsNotFound] = useState(false);
+
   useEffect(() => {
     const fetchPokemonById = () => {
       actions.getPokemonById(match.params.id).catch(err => setDetailsNotFound(true));
@@ -30,20 +27,11 @@ const PokemonDetailsPage = ({ match, actions, pokemon, myPokeDex, profileValues 
     return () => actions.resetChosenPokemon();
   }, []);
 
-  const reunderProfileSection = (sectionName, data) => (
-    <div className="col-md-6">
-      <div className="row">
-        <h2 className="col">
-          <u>{sectionName}</u>
-        </h2>
-      </div>
-      {data.map(value => (
-        <PokemonProfileItem key={value} title={value} />
-      ))}
-    </div>
-  );
+  const getAbilities = () => pokemon.abilities.map(a => a.ability.name);
+  const getTypes = () => pokemon.types.map(t => t.type.name);
+
   const renderSaveButton = () => {
-    if (isInMyPokeDex(myPokeDex, pokemon.id)) {
+    if (utils.isInMyPokeDex(myPokeDex, pokemon.id)) {
       return null;
     }
 
@@ -61,32 +49,6 @@ const PokemonDetailsPage = ({ match, actions, pokemon, myPokeDex, profileValues 
     );
   };
 
-  const renderStats = () => (
-    <div className="col-md-8">
-      <div className="row">
-        <h2 className="col">
-          <u>Statistics</u>
-        </h2>
-      </div>
-      {pokemon.stats.map(s => (
-        <ProgressBar key={s.stat.name} stat={s.stat} baseStat={s.base_stat} />
-      ))}
-    </div>
-  );
-
-  const renderProfile = () => (
-    <div className="col-12 col-md-6">
-      <div className="row">
-        <h2 className="col">
-          <u>Profile</u>
-        </h2>
-      </div>
-      {Object.keys(profileValues).map(pv => (
-        <PokemonProfileItem title={pv} value={profileValues[pv]} />
-      ))}
-    </div>
-  );
-
   if (detailsNotFound) {
     return <ErrorImageMessage classes="details-not-found" />;
   }
@@ -96,42 +58,19 @@ const PokemonDetailsPage = ({ match, actions, pokemon, myPokeDex, profileValues 
       <div className="row">
         <div className="col">
           <div className="card mb-4">
-            <PokeCardHeader pokeIndex={pokemon.id} button={renderSaveButton()} />
+            <PokeCardHeader id={pokemon.id} name={pokemon.name} button={renderSaveButton()} />
+            <hr />
             <div className="card-body">
-              <div className="row">
-                <div className="col col-md-12">
-                  <div className="row">
-                    <h5 className="px-3">
-                      {pokemon.flavor_text_entries.find(t => t.language.name === "en").flavor_text}
-                    </h5>
-                  </div>
-                </div>
-              </div>
+              <PokemonProfileDescription pokemon={pokemon} />
+              <hr />
+              <PokemonStatistics pokemon={pokemon} />
               <hr />
               <div className="row">
-                <div className="col-md-4">
-                  <div className="row">
-                    <h2 className="col text-center">
-                      <u>{pokemon.name}</u>
-                    </h2>
-                  </div>
-                  <div className="row">
-                    <img
-                      className="rounded mx-auto d-block mt-2"
-                      src={`/assets/sprites/${pokemon.id}.png`}
-                      alt={pokemon.name}
-                    />
-                  </div>
-                </div>
-                {renderStats()}
-              </div>
-              <hr />
-              <div className="row">
-                {renderProfile()}
+                <PokemonProfileMain sectionName="Profile" profileDict={profileDict} />
                 <div className="col-md-6">
                   <div className="row">
-                    {reunderProfileSection("Abilities", pokemon.abilities.map(a => a.ability.name))}
-                    {reunderProfileSection("Types", pokemon.types.map(t => t.type.name))}
+                    <PokemonProfileSub sectionName="Abilities" data={getAbilities()} />
+                    <PokemonProfileSub sectionName="Types" data={getTypes()} />
                   </div>
                 </div>
               </div>
@@ -145,20 +84,20 @@ const PokemonDetailsPage = ({ match, actions, pokemon, myPokeDex, profileValues 
 };
 
 const mapStateToProps = ({ pokemon }) => {
-  const profileValues = {};
+  const profileDict = {};
   if (pokemon.chosenPokemon) {
-    profileValues["Height"] = `${fromDmToCm(pokemon.chosenPokemon.height)} cm`;
-    profileValues["Weight"] = `${fromHgtoKg(pokemon.chosenPokemon.weight)} kg`;
-    profileValues["Capture Rate"] = `${getCaptureRate(pokemon.chosenPokemon.capture_rate)} %`;
-    profileValues["Color"] = pokemon.chosenPokemon.color.name;
-    profileValues["Hatch Counter"] = pokemon.chosenPokemon.hatch_counter;
-    profileValues["Habitat"] = pokemon.chosenPokemon.habitat.name;
-    profileValues["Genders"] = getGenders(pokemon.chosenPokemon.gender_rate);
+    profileDict["Height"] = `${utils.fromDmToCm(pokemon.chosenPokemon.height)} cm`;
+    profileDict["Weight"] = `${utils.fromHgtoKg(pokemon.chosenPokemon.weight)} kg`;
+    profileDict["Capture Rate"] = `${utils.getCaptureRate(pokemon.chosenPokemon.capture_rate)} %`;
+    profileDict["Color"] = pokemon.chosenPokemon.color.name;
+    profileDict["Hatch Counter"] = pokemon.chosenPokemon.hatch_counter;
+    profileDict["Habitat"] = pokemon.chosenPokemon.habitat.name;
+    profileDict["Genders"] = utils.getGenders(pokemon.chosenPokemon.gender_rate);
   }
   return {
     pokemon: pokemon.chosenPokemon,
     myPokeDex: pokemon.myPokeDex,
-    profileValues
+    profileDict
   };
 };
 
