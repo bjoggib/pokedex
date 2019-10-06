@@ -7,7 +7,6 @@ const ProgressBar = ({ stat, baseStat }) => (
       <div className="progress">
         <div
           className="progress-bar"
-          role="progressBar"
           style={{ width: `${baseStat}%` }}
           aria-valuenow="25"
           aria-valuemin="0"

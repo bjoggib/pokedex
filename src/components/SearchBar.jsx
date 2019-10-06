@@ -2,7 +2,7 @@ import React from "react";
 
 const SearchBar = ({ searchTerm, handleChange }) => (
   <div className="col-md-6 mt-4 mb-5">
-    <form className="search-bar">
+    <form className="search-bar" onSubmit={e => e.preventDefault()}>
       <div className="form-group">
         <input
           className="form-control"

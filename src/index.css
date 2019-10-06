@@ -265,6 +265,10 @@ h5 {
     background-image: url(/assets/pageNotFoundSmallScreen.png);
   }
 
+  .details-not-found {
+    background-image: url(/assets/detailsNotFoundSmallScreen.png);
+  }
+
   .loading-indicator {
     max-width: 100%;
     height: auto;

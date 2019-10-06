@@ -1,5 +1,6 @@
 const NAME_MAX_LENGTH = 10;
 const CAPTURE_RATE_MAX = 255;
+
 const stringCapitalized = str => `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
 
 const shortenString = str => (str.length > NAME_MAX_LENGTH ? `${str.slice(0, 8)}...` : str);

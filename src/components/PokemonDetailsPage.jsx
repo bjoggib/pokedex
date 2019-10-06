@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
@@ -15,11 +15,13 @@ import {
 } from "../helpers/utils";
 import { saveToPokeDexError, saveToPokeDexSuccess } from "../helpers/toastFunctions";
 import ProgressBar from "./ProgressBar";
+import PokeCardHeader from "./PokeCardHeader";
 
 const PokemonDetailsPage = ({ match, actions, pokemon, myPokeDex, profileValues }) => {
+  const [detailsNotFound, setDetailsNotFound] = useState(false);
   useEffect(() => {
     const fetchPokemonById = () => {
-      actions.getPokemonById(match.params.id);
+      actions.getPokemonById(match.params.id).catch(err => setDetailsNotFound(true));
       actions.getMyPokeDex();
     };
     fetchPokemonById();
@@ -83,23 +85,23 @@ const PokemonDetailsPage = ({ match, actions, pokemon, myPokeDex, profileValues 
       ))}
     </div>
   );
+
+  if (detailsNotFound) {
+    console.log("her");
+    return (
+      <div className="row">
+        <div className="message-image">
+          <div className="col page-not-found background-image" />
+        </div>
+      </div>
+    );
+  }
   if (pokemon) {
     return (
       <div className="row">
         <div className="col">
           <div className="card mb-4">
-            <div className="card-header">
-              <div className="row">
-                <div className="col-4">
-                  <h2>
-                    <u># {pokemon.id}</u>
-                  </h2>
-                </div>
-                <div className="col">
-                  <div className="float-right">{renderSaveButton()}</div>
-                </div>
-              </div>
-            </div>
+            <PokeCardHeader pokeIndex={pokemon.id} button={renderSaveButton()} />
             <div className="card-body">
               <div className="row">
                 <div className="col col-md-12">
